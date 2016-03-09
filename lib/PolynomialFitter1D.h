@@ -3,8 +3,6 @@
 #include <vector>
 #include "Gauss1d.h"
 
-namespace Optimization
-{
 namespace Gaussian1DFitting
 {
 class PolynomialFitter1D
@@ -71,6 +69,4 @@ protected:
     bool
     runIterativeGuo();
 };
-} // namespace Gaussian1DFitting
-} // namespace Optimization
-
+}

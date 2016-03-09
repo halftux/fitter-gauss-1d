@@ -18,8 +18,6 @@
 
 #include <vector>
 
-namespace Optimization
-{
 class LevMar
 {
 public:
@@ -89,4 +87,3 @@ protected:
     Impl &
     impl();
 };
-} // namespace Optimization

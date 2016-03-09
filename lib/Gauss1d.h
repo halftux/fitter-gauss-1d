@@ -35,8 +35,6 @@ clamp( const T & v, const T & v1, const T & v2 )
     return v;
 }
 
-namespace Optimization
-{
 typedef std::vector < double > VD;
 
 /// bounding parameters
@@ -267,4 +265,4 @@ protected:
     std::vector < RangeParam > m_ranges;
 };
 }
-}
+

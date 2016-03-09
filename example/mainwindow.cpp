@@ -21,7 +21,7 @@ makeData( int n, int nGauss, int poly, double rnd )
 {
     VD params;
     for ( int i = 0 ; i < nGauss ; ++i ) {
-        Optimization::Gauss1dNiceParams nice;
+        Gauss1dNiceParams nice;
 
         // 1: 1/2
         // 2: 1/3 2/3
@@ -52,7 +52,7 @@ makeData( int n, int nGauss, int poly, double rnd )
 
     VD result( n );
     for ( int i = 0 ; i < n ; ++i ) {
-        result[i] = Optimization::evalNGauss1dBkg( i, nGauss, poly, params );
+        result[i] = evalNGauss1dBkg( i, nGauss, poly, params );
         result[i] += ( drand48() - 0.5 ) * rnd;
     }
 
@@ -110,8 +110,8 @@ MainWindow::MainWindow( QWidget * parent ) :
     connect( ui->checkBoxRH, & QCheckBox::toggled, this, & MainWindow::submitRequest );
 
     // create a gaussian fit manager
-    m_gfm = new Gaussian1dFitService::Manager( this );
-    connect( m_gfm, & Gaussian1dFitService::Manager::results,
+    m_gfm = new FitterGauss1d::Manager( this );
+    connect( m_gfm, & FitterGauss1d::Manager::results,
              this, & MainWindow::gfResultsCB );
 
     onSliderChanged();
@@ -199,7 +199,7 @@ MainWindow::submitRequest()
 } // MainWindow::onSliderChanged
 
 void
-MainWindow::gfResultsCB( Gaussian1dFitService::ResultsG1dFit res )
+MainWindow::gfResultsCB( FitterGauss1d::ResultsG1dFit res )
 {
     m_gfResult = res;
     qDebug() << "results:" << m_gfResult.toString();
@@ -222,7 +222,7 @@ MainWindow::gfResultsCB( Gaussian1dFitService::ResultsG1dFit res )
     QVD vx( outputSize ), vy( outputSize );
     for ( int i = 0 ; i < outputSize ; ++i ) {
         double x = double (i) / outputSize * inputSize;
-        double y = Optimization::evalNGauss1dBkg(
+        double y = evalNGauss1dBkg(
             x,
             m_gfResult.input.nGaussians,
             m_gfResult.input.poly,

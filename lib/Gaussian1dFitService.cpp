@@ -1,10 +1,3 @@
-//#include "common.h"
-
-//#include "FitsParser.h"
-//#include "RaiCache.h"
-//#include "Optimization/LMGaussFitter1d.h"
-//#include "Optimization/LBTAGauss1dFitter.h"
-//#include "Optimization/HeuristicGauss1dFitter.h"
 #include "Gaussian1dFitService.h"
 #include "HeuristicGauss1dFitter.h"
 #include "LBTAGauss1dFitter.h"
@@ -14,7 +7,7 @@
 #include <QDir>
 #include <iostream>
 
-namespace Gaussian1dFitService
+namespace FitterGauss1d
 {
 // register metatypes with QT so that we can pass Results and InputParameters via signals/slots
 static bool
@@ -22,10 +15,10 @@ registerMetaTypes()
 {
     std::cerr << "Registering metatype\n";
     std::cerr << "Gaussian1dFitService::Results = "
-              << qRegisterMetaType < Gaussian1dFitService::ResultsG1dFit > ( "ResultsG1dFit" ) <<
+              << qRegisterMetaType < FitterGauss1d::ResultsG1dFit > ( "ResultsG1dFit" ) <<
         "\n";
     std::cerr << "Gaussian1dFitService::InputParameters = "
-              << qRegisterMetaType < Gaussian1dFitService::InputParametersG1dFit > (
+              << qRegisterMetaType < FitterGauss1d::InputParametersG1dFit > (
         "InputParametersG1dFit" )
               << "\n";
     return true;
@@ -215,7 +208,7 @@ Worker::doWork( InputParametersG1dFit input )
     int iteration = 0;
 
     // set up the data source for the various gaussian fitters
-    Optimization::Gaussian1DFitting::FitterInput dataInterface( input.data );
+    Gaussian1DFitting::FitterInput dataInterface( input.data );
     dataInterface.x1 = input.left;
     dataInterface.x2 = input.right;
     dataInterface.nGaussians = input.nGaussians;
@@ -244,7 +237,7 @@ Worker::doWork( InputParametersG1dFit input )
     // run the heuristic fitter
     // ----------------------------------------------------------------------
     if ( doHeuristic ) {
-        Optimization::Gaussian1DFitting::HeuristicFitter hFitter( dataInterface );
+        Gaussian1DFitting::HeuristicFitter hFitter( dataInterface );
 
         // start fitting
         iteration = 0;
@@ -298,7 +291,7 @@ Worker::doWork( InputParametersG1dFit input )
     // setup the LBTA fitter
     // ----------------------------------------------------------------------
     if ( doLBTA ) {
-        Optimization::Gaussian1DFitting::LBTAFitter taFitter( dataInterface );
+        Gaussian1DFitting::LBTAFitter taFitter( dataInterface );
         taFitter.setInitialParams( res.params );
 
         // start fitting
@@ -346,7 +339,7 @@ Worker::doWork( InputParametersG1dFit input )
         // ----------------------------------------------------------------------
         // setup up the lev-mar fitter
         // ----------------------------------------------------------------------
-        Optimization::Gaussian1DFitting::LMFitter lmfitter( dataInterface );
+        Gaussian1DFitting::LMFitter lmfitter( dataInterface );
         lmfitter.setInitialParams( res.params );
 
         // start fitting

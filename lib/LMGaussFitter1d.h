@@ -12,8 +12,6 @@
  * 1d gaussian fitter for 1d data of doubles, using levenberg-marquardt
  */
 
-namespace Optimization
-{
 namespace Gaussian1DFitting
 {
 class LMFitter
@@ -176,6 +174,4 @@ LMFitter::iterate()
 
     return false;
 } // LMFitter::iterate
-} // namespace Gaussian1DFitting
-} // namespace Optimization
-
+}

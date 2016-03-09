@@ -34,7 +34,7 @@ private slots:
     void
     submitRequest();
 
-    void gfResultsCB( Gaussian1dFitService::ResultsG1dFit);
+    void gfResultsCB( FitterGauss1d::ResultsG1dFit);
 
     void regenButtonCB();
 
@@ -42,9 +42,9 @@ private slots:
 private:
 
     Ui::MainWindow * ui = nullptr;
-    Gaussian1dFitService::Manager * m_gfm = nullptr;
-    Gaussian1dFitService::InputParametersG1dFit m_gfInput;
-    Gaussian1dFitService::ResultsG1dFit m_gfResult;
+    FitterGauss1d::Manager * m_gfm = nullptr;
+    FitterGauss1d::InputParametersG1dFit m_gfInput;
+    FitterGauss1d::ResultsG1dFit m_gfResult;
     qint64 m_lastGfId = 0;
 };
 

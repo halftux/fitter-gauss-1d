@@ -16,15 +16,13 @@
  * http://www.sciencedirect.com/science/article/pii/S0305054803001722?np=y#FIG3
  */
 
-namespace Optimization
-{
 namespace Gaussian1DFitting
 {
 class LBTAFitter
 {
 public:
 
-    typedef Optimization::VD VD;
+    typedef VD VD;
 
     LBTAFitter( FitterInput & dataInterface )
         : di( dataInterface )
@@ -246,7 +244,6 @@ LBTAFitter::iterate()
         tHeap.push( tnew );
         qDebug() << "LBTA after pop/push max=" << tHeap.top();
 
-//        if ( costNew < currCost ) {
         currCost = costNew;
         currX = xNew;
         qDebug() << "LBTA: stage 2 updating current solution " << currCost << "\n";
@@ -256,43 +253,15 @@ LBTAFitter::iterate()
             bestX = currX;
             qDebug() << "LBTA: stage 2 updating best solution " << bestCost << "\n";
         }
-
-//        }
     }
     else {
         qDebug() << "LBTA nfailed" << nFailed;
         nFailed++;
         if ( nFailed > nFailedThreshold ) {
-//            QString str;
-//            QTextStream out(&str);
-//            out << "=================== LBTA finished ======================\n";
-//            out << "best cost = " << bestCost << "\n";
-//            out << "ngauss / npoly = " << di.nGaussians << " " << di.nPolyTerms << "\n";
-//            out << "ranges:\n";
-//            for( size_t i = 0 ; i < di.ranges.size() ; i ++ ) {
-//                out << QString("  %1) %2 .. %3  /  %4\n")
-//                          .arg(i, 3)
-//                          .arg(di.ranges[i].min, 15)
-//                          .arg(di.ranges[i].max, 15)
-//                          .arg(di.ranges[i].step, 15);
-//            }
-//            out << "x12 = " << di.x1 << " .. " << di.x2 << "\n";
-//            out << "dataRange = " << di.rangeMin << " .. " << di.rangeMax << "\n";
-//            out << "params: ";
-//            for( size_t i = 0 ; i < bestX.size() ; i ++)
-//                out << bestX[i] << " ";
-//            out << "\n";
-//            out << "---------------------------------------------------------\n";
-
-//            dbg(1) << str;
             return true;
         }
-
-//        dbg(1) << "stage 2 nFailed = " << nFailed << "\n";
     }
 
     return false;
-} // LBTAFitter::iterate
-} // namespace Gaussian1DFitting
-} // namespace Optimization
-
+}
+}

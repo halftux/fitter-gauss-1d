@@ -16,15 +16,12 @@
  * 1d heuristic fitter for an array of doubles
  */
 
-namespace Optimization
-{
 namespace Gaussian1DFitting
 {
 class HeuristicFitter
 {
 public:
 
-    typedef Optimization::VD VD;
     HeuristicFitter( FitterInput & dataInterface )
         : di( dataInterface )
     {
@@ -182,6 +179,4 @@ HeuristicFitter::iterate()
 
     return true;
 } // HeuristicFitter::iterate
-} // namespace Gaussian1DFitting
-} // namespace Optimization
-
+}

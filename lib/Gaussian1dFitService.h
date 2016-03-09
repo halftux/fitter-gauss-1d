@@ -9,7 +9,7 @@
 
 #include <stdexcept>
 
-namespace Gaussian1dFitService
+namespace FitterGauss1d
 {
 // input parameters for extraction
 struct InputParametersG1dFit {
@@ -120,24 +120,20 @@ class Worker : public QObject
 {
     Q_OBJECT
 
-public:
+    friend class Manager;
 
-    /// required interface for the various XXXGaussFitter1d
-//    int dataSize; // size of data
-//    std::vector < Optimization::RangeParam > ranges;
-//    double
-//    getData( int x );       // access to the data
-
-//    std::vector < double > data; // raw access to the data
-
-protected:
+private:
 
     // constructor, only really meant to be used internally by the Manager class
     Worker( bool & interruptFlagRef );
     ~Worker();
-    friend class Manager;
+    bool & interruptFlag_;
+    void
+    checkForInterrupts();
 
-public slots:
+    void doWork( InputParametersG1dFit );
+
+private slots:
 
     void onGoFromService( InputParametersG1dFit );
 
@@ -155,14 +151,6 @@ signals:
     // called when worker interrupted job
     void
     interrupt();
-
-protected:
-
-    bool & interruptFlag_;
-    void
-    checkForInterrupts();
-
-    void doWork( InputParametersG1dFit );
 };
 
 class Manager : public QObject
@@ -182,15 +170,15 @@ signals:
 
     /// emitted when results (partial or complete) are available
     void
-    results( Gaussian1dFitService::ResultsG1dFit );
+    results( FitterGauss1d::ResultsG1dFit );
 
     // emitted when complete profile is available
     void
-    done( Gaussian1dFitService::ResultsG1dFit );
+    done( FitterGauss1d::ResultsG1dFit );
 
     // emitted when partial result is ready
     void
-    progress( Gaussian1dFitService::ResultsG1dFit );
+    progress( FitterGauss1d::ResultsG1dFit );
 
     // emitted when some sort of error occurs
     void

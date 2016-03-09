@@ -10,8 +10,6 @@
 #include <iostream>
 #include <stdexcept>
 
-namespace Optimization
-{
 /// Implementation using GSL's multifit algorithm (which is using levmar)
 struct LevMar::Impl {
 protected:
@@ -419,4 +417,3 @@ LevMar::impl()
 {
     return * m_impl;
 }
-} // namespace Optimization

@@ -55,8 +55,6 @@ gslErrorHandler(
     throw gsl_exception( reason, file, line, gsl_errno );
 }
 
-namespace Optimization
-{
 namespace Gaussian1DFitting
 {
 PolynomialFitter1D::PolynomialFitter1D()
@@ -498,5 +496,4 @@ GuoFit::runIterativeGuo()
 
     return true;
 } // GuoFit::runIterativeGuo
-} // namespace Gaussian1DFitting
-} // namespace Optimization
+}
