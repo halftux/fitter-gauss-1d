@@ -2,8 +2,8 @@
 
 //#include "common.h"
 //#include "Gauss1d.h"
-//#include "PolynomialFitter1D.h"
 #include "PolynomialFitter1D.h"
+#include "Gauss1d.h"
 
 #include <QString>
 #include <QRectF>
@@ -16,7 +16,7 @@
  * 1d heuristic fitter for an array of doubles
  */
 
-namespace Gaussian1DFitting
+namespace FitterGauss1d
 {
 class HeuristicFitter
 {

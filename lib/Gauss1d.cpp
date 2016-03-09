@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Gauss1d.h"
 
+namespace FitterGauss1d
+{
 const double SIGMA2FWHM = 2.354820045030949382023138652919399275494771378771641077045051;
 
 // convert 3 parameters in an array to nice (named) parameters
@@ -24,4 +26,5 @@ Gauss1dNiceParams::convertToUgly() const
     res[1] = amplitude;
     res[2] = - 0.5 / ( ( fwhm / SIGMA2FWHM ) * ( fwhm / SIGMA2FWHM ) );
     return res;
+}
 }

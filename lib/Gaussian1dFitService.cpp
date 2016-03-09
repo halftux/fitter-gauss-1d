@@ -208,7 +208,7 @@ Worker::doWork( InputParametersG1dFit input )
     int iteration = 0;
 
     // set up the data source for the various gaussian fitters
-    Gaussian1DFitting::FitterInput dataInterface( input.data );
+    FitterGauss1d::FitterInput dataInterface( input.data );
     dataInterface.x1 = input.left;
     dataInterface.x2 = input.right;
     dataInterface.nGaussians = input.nGaussians;
@@ -237,7 +237,7 @@ Worker::doWork( InputParametersG1dFit input )
     // run the heuristic fitter
     // ----------------------------------------------------------------------
     if ( doHeuristic ) {
-        Gaussian1DFitting::HeuristicFitter hFitter( dataInterface );
+        FitterGauss1d::HeuristicFitter hFitter( dataInterface );
 
         // start fitting
         iteration = 0;
@@ -291,7 +291,7 @@ Worker::doWork( InputParametersG1dFit input )
     // setup the LBTA fitter
     // ----------------------------------------------------------------------
     if ( doLBTA ) {
-        Gaussian1DFitting::LBTAFitter taFitter( dataInterface );
+        FitterGauss1d::LBTAFitter taFitter( dataInterface );
         taFitter.setInitialParams( res.params );
 
         // start fitting
@@ -339,7 +339,7 @@ Worker::doWork( InputParametersG1dFit input )
         // ----------------------------------------------------------------------
         // setup up the lev-mar fitter
         // ----------------------------------------------------------------------
-        Gaussian1DFitting::LMFitter lmfitter( dataInterface );
+        FitterGauss1d::LMFitter lmfitter( dataInterface );
         lmfitter.setInitialParams( res.params );
 
         // start fitting

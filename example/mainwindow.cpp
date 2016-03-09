@@ -21,7 +21,7 @@ makeData( int n, int nGauss, int poly, double rnd )
 {
     VD params;
     for ( int i = 0 ; i < nGauss ; ++i ) {
-        Gauss1dNiceParams nice;
+        FitterGauss1d::Gauss1dNiceParams nice;
 
         // 1: 1/2
         // 2: 1/3 2/3
@@ -52,7 +52,7 @@ makeData( int n, int nGauss, int poly, double rnd )
 
     VD result( n );
     for ( int i = 0 ; i < n ; ++i ) {
-        result[i] = evalNGauss1dBkg( i, nGauss, poly, params );
+        result[i] = FitterGauss1d::evalNGauss1dBkg( i, nGauss, poly, params );
         result[i] += ( drand48() - 0.5 ) * rnd;
     }
 
@@ -222,7 +222,7 @@ MainWindow::gfResultsCB( FitterGauss1d::ResultsG1dFit res )
     QVD vx( outputSize ), vy( outputSize );
     for ( int i = 0 ; i < outputSize ; ++i ) {
         double x = double (i) / outputSize * inputSize;
-        double y = evalNGauss1dBkg(
+        double y = FitterGauss1d::evalNGauss1dBkg(
             x,
             m_gfResult.input.nGaussians,
             m_gfResult.input.poly,

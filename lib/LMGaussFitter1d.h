@@ -12,7 +12,7 @@
  * 1d gaussian fitter for 1d data of doubles, using levenberg-marquardt
  */
 
-namespace Gaussian1DFitting
+namespace FitterGauss1d
 {
 class LMFitter
 {

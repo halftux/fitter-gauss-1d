@@ -4,39 +4,43 @@
 #include <gsl/gsl_linalg.h>
 #include <sstream>
 
-// this is the exception the gsl error trap will throw
-class gsl_exception : public std::runtime_error
+namespace FitterGauss1d
+{
+// exception helper class for gsl errors
+class GslException : public std::runtime_error
 {
 public:
 
-    explicit gsl_exception (
+    explicit GslException (
         const std::string & p_reason,
         const std::string & p_file,
         int p_line,
         int p_gslErrno
         )
-        : std::runtime_error( "GSL global error" )
+        : std::runtime_error( "GSL error" )
     {
-        reason = p_reason;
-        file = p_file;
-        line = p_line;
-        gslErrno = p_gslErrno;
+        m_reason = p_reason;
+        m_fileName = p_file;
+        m_lineNumber = p_line;
+        m_gslErrno = p_gslErrno;
     }
 
-    virtual ~gsl_exception() throw ( ) { }
+    virtual ~GslException() throw ( ) { }
 
     virtual const char *
     what() const throw ( )
     {
         std::ostringstream out;
-        out << "GSL-error:" << file << ":" << line << ":" << reason << "["
-            << gslErrno << "]";
+        out << "GSL-error:" << m_fileName << ":" << m_lineNumber << ":" << m_reason << "["
+            << m_gslErrno << "]";
         std::string stdstr = out.str();
         return stdstr.c_str();
     }
 
-    std::string reason, file;
-    int line, gslErrno;
+private:
+
+    std::string m_reason, m_fileName;
+    int m_lineNumber, m_gslErrno;
 };
 
 /// global gsl error handler
@@ -52,11 +56,9 @@ gslErrorHandler(
                 << " errno: " << gsl_errno
                 << " strerr: " << gsl_strerror( gsl_errno );
 
-    throw gsl_exception( reason, file, line, gsl_errno );
+    throw GslException( reason, file, line, gsl_errno );
 }
 
-namespace Gaussian1DFitting
-{
 PolynomialFitter1D::PolynomialFitter1D()
 { }
 
@@ -142,7 +144,7 @@ GuoFit::iterate()
             res = runIterativeGuo();
         }
     }
-    catch ( const gsl_exception & e ) {
+    catch ( const GslException & e ) {
         qCritical() << "gsl exception in iterate:" << e.what();
     }
     catch ( const std::runtime_error & e ) {

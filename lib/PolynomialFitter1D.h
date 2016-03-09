@@ -3,7 +3,7 @@
 #include <vector>
 #include "Gauss1d.h"
 
-namespace Gaussian1DFitting
+namespace FitterGauss1d
 {
 class PolynomialFitter1D
 {

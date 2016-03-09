@@ -170,15 +170,15 @@ signals:
 
     /// emitted when results (partial or complete) are available
     void
-    results( FitterGauss1d::ResultsG1dFit );
+    results( ResultsG1dFit );
 
     // emitted when complete profile is available
     void
-    done( FitterGauss1d::ResultsG1dFit );
+    done( ResultsG1dFit );
 
     // emitted when partial result is ready
     void
-    progress( FitterGauss1d::ResultsG1dFit );
+    progress( ResultsG1dFit );
 
     // emitted when some sort of error occurs
     void

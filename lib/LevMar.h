@@ -18,6 +18,8 @@
 
 #include <vector>
 
+namespace FitterGauss1d
+{
 class LevMar
 {
 public:
@@ -87,3 +89,4 @@ protected:
     Impl &
     impl();
 };
+}

@@ -6,6 +6,8 @@
 #include <vector>
 #include <cstdlib>
 
+namespace FitterGauss1d
+{
 /// convenience macro to throw exception with file/line number
 #define LTHROW( x ) \
     do { \
@@ -75,7 +77,7 @@ struct RangeParam {
     double
     rnd()
     {
-        if ( isSet ) { return ::rnd( min, max ); }
+        if ( isSet ) { return FitterGauss1d::rnd( min, max ); }
         else { return 0; }
     }
 
@@ -88,7 +90,10 @@ struct RangeParam {
     }
 };
 
-// nice (named) gaussian 2d parameters
+/// nice (named) gaussian 2d parameters, with a nice FWHM
+///
+/// the ugly version uses a slightly different version of it so that the evaluation
+/// of the actual gaussian function is sligtly faster
 struct Gauss1dNiceParams {
     double center, amplitude, fwhm;
     static Gauss1dNiceParams
@@ -104,7 +109,7 @@ struct Gauss1dNiceParams {
 ///
 /// b * exp( c * sqr(x - a))
 ///
-/// so b is mean, a is center, and c is 'sigma-controlling' term
+/// so b is mean, a is center, and c is a 'sigma-controlling' term
 ///
 inline double
 evalGauss1d( double x, const double * p )
@@ -148,8 +153,6 @@ evalNGauss1dBkg( double x, int nGaussians, int poly, const VD & v )
     return evalNGauss1dBkg( x, nGaussians, poly, & ( v[0] ) );
 }
 
-namespace Gaussian1DFitting
-{
 struct NoRangeCheckPolicy {
     void
     checkRange( int, int, int, size_t ) const { }
@@ -265,4 +268,3 @@ protected:
     std::vector < RangeParam > m_ranges;
 };
 }
-

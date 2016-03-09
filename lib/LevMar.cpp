@@ -10,6 +10,8 @@
 #include <iostream>
 #include <stdexcept>
 
+namespace FitterGauss1d
+{
 /// Implementation using GSL's multifit algorithm (which is using levmar)
 struct LevMar::Impl {
 protected:
@@ -416,4 +418,5 @@ LevMar::Impl &
 LevMar::impl()
 {
     return * m_impl;
+}
 }

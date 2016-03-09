@@ -16,7 +16,7 @@
  * http://www.sciencedirect.com/science/article/pii/S0305054803001722?np=y#FIG3
  */
 
-namespace Gaussian1DFitting
+namespace FitterGauss1d
 {
 class LBTAFitter
 {
