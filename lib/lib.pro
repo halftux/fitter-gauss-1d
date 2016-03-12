@@ -29,10 +29,12 @@ HEADERS += \
     LMGaussFitter1d.h \
     LevMar.h
 
-GSLROOTDIR=$$(HOME)/Software/gsl-2.1
+#GSLROOTDIR=$$(HOME)/Software/gsl-2.1
 
-INCLUDEPATH += $${GSLROOTDIR}/include
-LIBS += -L$$GSLROOTDIR/lib -lgsl
+#INCLUDEPATH += $${GSLROOTDIR}/include
+#LIBS += -L$$GSLROOTDIR/lib -lgsl
+
+LIBS += -lgsl -lblas
 
 FORMS += \
     mainwindow.ui

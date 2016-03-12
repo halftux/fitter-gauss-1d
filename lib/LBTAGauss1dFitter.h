@@ -22,8 +22,6 @@ class LBTAFitter
 {
 public:
 
-    typedef VD VD;
-
     LBTAFitter( FitterInput & dataInterface )
         : di( dataInterface )
     {
@@ -86,8 +84,8 @@ public:
     std::priority_queue < double > tHeap;
 };
 
-typename LBTAFitter::VD
-LBTAFitter::calculateNeighbor( const LBTAFitter::VD & x )
+VD
+LBTAFitter::calculateNeighbor( const VD & x )
 {
 //    VD res = x;
 //    int np = di.numParams();
@@ -105,7 +103,7 @@ LBTAFitter::calculateNeighbor( const LBTAFitter::VD & x )
     return res;
 }
 
-const typename LBTAFitter::VD &
+const VD &
 LBTAFitter::getResults()
 {
     return bestX;

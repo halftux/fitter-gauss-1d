@@ -33,3 +33,5 @@ else:unix: LIBS += -L$$OUT_PWD/../lib/ -lfitter-gauss-1d
 
 INCLUDEPATH += $$PWD/../lib
 DEPENDPATH += $$PWD/../lib
+
+LIBS += -lgsl -lblas

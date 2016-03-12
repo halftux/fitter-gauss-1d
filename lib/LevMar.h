@@ -48,7 +48,7 @@ public:
 
     /// set starting parameters via pointer, the class makes its own copy
     void
-    setStartParameters( size_t n, const double * ptr );
+    setStartParameters( std::size_t n, const double * ptr );
 
     /// set the number of samples - this is needed for the lev-mar to allocate
     /// appropriate sizes of buffers for calculations. It is also the size that is
