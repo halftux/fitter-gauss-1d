@@ -36,7 +36,6 @@ HEADERS += \
 
 LIBS += -lgsl -lblas
 
-FORMS += \
-    mainwindow.ui
+FORMS +=
 
 
