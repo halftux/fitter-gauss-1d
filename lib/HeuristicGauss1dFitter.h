@@ -93,7 +93,7 @@ HeuristicFitter::iterate()
         std::vector < std::pair < double, double > > fitData;
         for ( int x = di.x1 ; x <= di.x2 ; x++ ) {
             double y = di.get( x );
-            if ( isnan( y ) ) {
+            if ( std::isnan( y ) ) {
                 continue;
             }
             fitData.push_back( std::pair < double, double > ( x, y ) );
@@ -138,10 +138,10 @@ HeuristicFitter::iterate()
         double maxX = di.x1;
         for ( int x = di.x1 ; x <= di.x2 ; x++ ) {
             double val = di.get( x );
-            if ( isnan( val ) ) {
+            if ( std::isnan( val ) ) {
                 continue;
             }
-            if ( isnan( maxVal ) || val > maxVal ) {
+            if ( std::isnan( maxVal ) || val > maxVal ) {
                 maxX = x;
                 maxVal = val;
             }
@@ -161,11 +161,11 @@ HeuristicFitter::iterate()
         std::vector < std::pair < double, double > > fitData;
         for ( int x = di.x1 ; x <= di.x2 ; x++ ) {
             double y = di.get( x );
-            if ( isnan( y ) ) {
+            if ( std::isnan( y ) ) {
                 continue;
             }
             y -= evalNGauss1dBkg( x, di.nGaussians, di.nPolyTerms, & params[0] );
-            if ( isnan( y ) ) {
+            if ( std::isnan( y ) ) {
                 continue;
             }
             fitData.push_back( std::pair < double, double > ( x, y ) );

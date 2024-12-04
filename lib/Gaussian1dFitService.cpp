@@ -2,7 +2,7 @@
 #include "HeuristicGauss1dFitter.h"
 #include "LBTAGauss1dFitter.h"
 #include "LMGaussFitter1d.h"
-#include <QTime>
+#include <QElapsedTimer>
 #include <QMetaType>
 #include <QDir>
 #include <iostream>
@@ -51,7 +51,7 @@ Results::Results(const Results & r)
 
 Manager::Manager( QObject * parent ) :
     QObject( parent ),
-    worker_( interruptRequested_ )
+    worker_( interruptRequested_=false )
 {
     // initialize internal fields
     interruptRequested_ = false;
@@ -201,7 +201,7 @@ Worker::doWork( InputParametersG1dFit input )
     //    doLM = false;
 
     // initialize timer for reporting progress
-    QTime progressTimer;
+    QElapsedTimer progressTimer;
     progressTimer.restart();
     bool firstProgressNeeded = true;
 
@@ -445,4 +445,4 @@ Manager::onInterrupt()
 //    }
 //    return data[x];
 //}
-}; // namespace Gaussian1dFitService
+} // namespace Gaussian1dFitService
