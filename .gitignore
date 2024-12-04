@@ -29,3 +29,6 @@
 
 # emacs by-products
 *~
+
+*.pro.user
+*.pro.user.*
