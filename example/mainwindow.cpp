@@ -141,6 +141,7 @@ MainWindow::~MainWindow()
 void
 MainWindow::on_actionQuit_triggered()
 {
+	m_gfm->stop();
     QApplication::exit();
 }
 

@@ -89,6 +89,12 @@ Manager::request( InputParametersG1dFit input )
     schedulePending();
 }
 
+void
+Manager::stop()
+{
+   workerThread_.quit();
+}
+
 // if there is a pending request, and worker is not busy, ask worker
 // to process the pending request
 // otherwise do nothing

@@ -189,6 +189,7 @@ signals:
 public slots:
 
     void request( InputParametersG1dFit );
+    void stop();
 
 protected slots:
 
