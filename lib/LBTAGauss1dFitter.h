@@ -97,7 +97,11 @@ LBTAFitter::calculateNeighbor( const VD & x )
     int np = di.numParams();
     for ( int ind = 0 ; ind < np ; ++ind ) {
 //        int ind = qrand() % np;
+#ifdef Q_OS_UNIX
         res[ind] += ( drand48() * 2 - 1 ) * di.ranges[ind].heuristicMaxStep;
+#else
+        res[ind] += ( rand() * 2 - 1 ) * di.ranges[ind].heuristicMaxStep;
+#endif
         di.clampParams( res );
     }
     return res;

@@ -20,7 +20,11 @@ namespace FitterGauss1d
 inline double
 rnd( double min, double max )
 {
+#ifdef Q_OS_UNIX
     return drand48() * ( max - min ) + min;
+#else
+    return rand() * ( max - min ) + min;
+#endif
 }
 
 template < typename T >
